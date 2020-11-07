@@ -4,6 +4,7 @@ include './../app/libraries/Rota.php';
 include './../app/libraries/Controller.php';
 include './../app/libraries/Database.php';
 
+
 $db = new Database();
 
 $nome = "Bolo de Cenoura";
@@ -17,9 +18,6 @@ $db->bind(":descricao", $descricao);
 $db->bind(":preco", $preco);
 $db->bind(":imagem", $imagem);
 
-$db->executa();
-
-echo "Total de resultados: ". $db->totalResultados() . "<br>";
 
 ?>
 <!DOCTYPE html>

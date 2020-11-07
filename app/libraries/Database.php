@@ -2,10 +2,11 @@
 
 class Database{
 
-    private $server = "lcalhost";
+    private $server = "localhost";
     private $user = "root";
     private $pass = "";
     private $db = 'delivery';
+    private $port = '3306';
     private $dbh;
     private $stmt;
 
@@ -23,6 +24,7 @@ class Database{
         try{
           //cria a instancia do PDO
           $this->dbh = new PDO($dsn,  $this->user, $this->pass);
+         
         }catch(PDOException $e){
           print "Error!: " . $e->getMessage() . "<br/>";
           die();
