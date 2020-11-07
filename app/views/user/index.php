@@ -32,7 +32,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="" method="post">
+                            <form action="<?=URL?>user/" method="post">
                             
                                 <div class="form-group">
                                     <label for="nome-produto">Nome do produo</label>
