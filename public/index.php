@@ -47,8 +47,6 @@ $db->bind(":imagem", $imagem);
     <script>
 
         $(document).ready(function(){
-            
-            
 
             //valor do perdido passado para uma variavel
             let valorTotal = parseFloat($('#valor_total').val());
@@ -87,6 +85,7 @@ $db->bind(":imagem", $imagem);
 
                 valorTotal += preco;
                 console.log("Contagem depois da soma: ",valor);
+
                 //essa linha transforma o valor da variavel em formato de real
                 let valorTotalBRL = Intl.NumberFormat('pt-br', {style: 'currency', currency: 'BRL'}).format(valorTotal)
                 $('#valor_total').val(valorTotalBRL)
