@@ -53,22 +53,40 @@ $db->bind(":imagem", $imagem);
             //valor do perdido passado para uma variavel
             let valorTotal = parseFloat($('#valor_total').val());
 
+            let contaItens = parseInt($('#count_cart').text());
+
             console.log(valorTotal)
 
-
-            // *********** botão do item, quando clicado acrescenta um item ao carrinho
-            $('#add_item1, #add_plus').click(function(){
+            
+            // esse trecho busca no banco de a quantidade de itens, e vai colocando a lógica do botões de adicionar, diminui, acrescentar etc em cada item da lista de produtos
+            <?php
+                // *********************** inicio do laço do banco de dados *********************
+               
+                $db->query("SELECT * FROM produtos");
+                $num_item_logica = 1;// item responsável por ir adicinando a lógica dos botões conforme o número de produtos vindos do banco de dados
+                foreach($db->resultados() as $produto_logica):
                 
+            ?>
+            // *****************************************************************
+                
+                console.log('numero: ',<?= $num_item_logica ?>)
+            // *********** botão do item, quando clicado acrescenta um item ao carrinho
+            $('#add_item<?= $num_item_logica ?>, #add_plus<?= $num_item_logica ?>').click(function(){
+                
+
                 //pega o preço do item 1 coloca na variavel preco
-                let preco = parseFloat($('#preco_item1').text());
+                let preco = parseFloat($('#preco_item<?= $num_item_logica ?>').text());
 
                 //essa linha acrescenta + 1 do item nos pedidos
-                let valor = parseInt($('form #id_form_item #add1').text()) + 1;
-                $('form #id_form_item #add1').text(valor);
-                $('#count_cart').text(valor);
+                let valor = parseInt($('form #id_form_item #add<?= $num_item_logica ?>').text()) + 1;
+                $('form #id_form_item #add<?= $num_item_logica ?>').text(valor);
+
+                //esse trecho acrescenta um a sacola de compras 
+                contaItens += 1;
+                $('#count_cart').text(contaItens);
 
                 valorTotal += preco;
-                
+                console.log("Contagem depois da soma: ",valor);
                 //essa linha transforma o valor da variavel em formato de real
                 let valorTotalBRL = Intl.NumberFormat('pt-br', {style: 'currency', currency: 'BRL'}).format(valorTotal)
                 $('#valor_total').val(valorTotalBRL)
@@ -78,31 +96,34 @@ $db->bind(":imagem", $imagem);
 
                 
                 // **********  *********** */
-                let itemClicado = parseInt($('form #id_form_item #add1').text());
+                let itemClicado = parseInt($('form #id_form_item #add<?= $num_item_logica ?>').text());
                 if(itemClicado){
-                    $('#confirma_item1').addClass('fas fa-check')
+                    $('#confirma_item<?= $num_item_logica ?>').addClass('fas fa-check')
                 }else{
-                    $('#confirma_item1').removeClass('fas fa-check')
+                    $('#confirma_item<?= $num_item_logica ?>').removeClass('fas fa-check')
                 }
 
                 console.log('item: ',itemClicado) //aqui é só pra mim saber se está saindo o valor
             });
 
 
+            // **************** botão que diminui em 1 o valor do carrinho **************
+            $('#add_less<?= $num_item_logica ?>').click(function(){
 
-            $('#add_less').click(function(){
 
-
-                let valor = parseInt($('form #id_form_item #add1').text());
-                let preco = parseFloat($('#preco_item1').text());
+                let valor = parseInt($('form #id_form_item #add<?= $num_item_logica ?>').text());
+                let preco = parseFloat($('#preco_item<?= $num_item_logica ?>').text());
 
                 if(valor > 0){
 
                     
                     valor -= 1;
                     
-                    $('form #id_form_item #add1').text(valor);
-                    $('#count_cart').text(valor);
+                    $('form #id_form_item #add<?= $num_item_logica ?>').text(valor);
+
+                    //Esse diminui 1 item no sacola de compras
+                    contaItens -= 1;
+                    $('#count_cart').text(contaItens);
 
                     valorTotal -= preco;
 
@@ -113,16 +134,23 @@ $db->bind(":imagem", $imagem);
 
                     
                 }
-                let itemClicado = parseInt($('form #id_form_item #add1').text());
+                let itemClicado = parseInt($('form #id_form_item #add<?= $num_item_logica ?>').text());
                 if(itemClicado >= 1){
-                        $('#confirma_item1').addClass('fas fa-check')
+                        $('#confirma_item<?= $num_item_logica ?>').addClass('fas fa-check')
                     }else{
-                        $('#confirma_item1').removeClass('fas fa-check')
+                        $('#confirma_item<?= $num_item_logica ?>').removeClass('fas fa-check')
                     }
                 
                 console.log('item: ',itemClicado) //aqui é só pra mim saber se está saindo o valor
                 
             });
+            // *****************************************************************************
+
+            <?php
+                // ********* fim do laço do banco de dados ****************
+                $num_item_logica++;
+                endforeach;
+            ?>
 
         });
 
