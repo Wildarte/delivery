@@ -21,7 +21,7 @@
             Cadastrar Produto
             </button>
 
-            <!-- Modal -->
+            <!-- ********************************** Modal para cadastro **************************** -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -68,7 +68,7 @@
                     </div>
                 </div>
             </div>
-            
+            <!-- ********************************* Fim do Modal para Cadastro *************************** -->
         </div>
     
        
@@ -82,32 +82,39 @@
             $db = new Database();
 
             $db->query("SELECT * FROM produtos");
-            
+            $num_edita_produto = 1;
             foreach($db->resultados() as $produto):
                 
         ?>
             <!-- Esse trexo fica todos os produtos cadastrados-->
             <div class="col-md-4">
-            <span hidden="hidden"><?= $produto->id ?></span>
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="<?= URL.'public/'.$produto->imagem ?>" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title"><?= $produto->nome ?></h5>
-                    <p class="card-text"><?= $produto->descricao ?></p>
-                    <p class="card-title">R$ <?= $produto->preco ?></p>
+                
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" id="img_produto<?=$num_edita_produto?>" src="<?= URL.'public/'.$produto->imagem ?>" alt="Card image cap">
+                    <div class="card-body" id="card_edita_prod<?=$num_edita_produto?>">
+                        <span hidden="hidden" id="id<?=$num_edita_produto?>"><?= $produto->id ?></span>
+                        <h5 class="card-title" id="nome_produto_edita<?= $num_edita_produto ?>"><?= $produto->nome ?></h5>
+                        <p class="card-text" id="desc_produto_edita<?= $num_edita_produto?>"><?= $produto->descricao ?></p>
+                        <p>R$ <span class="card-title" id="preco_produto_edita<?=$num_edita_produto?>"><?= $produto->preco ?></span></p>
 
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-editar-produto1" id="botao-edita-produto">
-                    Editar
-                    </button>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-editar-produto1" id="botao-edita-produto<?= $num_edita_produto ?>">
+                        Editar
+                        </button>
 
+                    </div>
                 </div>
-            </div>
 
             </div>
              
+            <?php
+                // *********** fim do foreach **********************
+                $num_edita_produto++;
+                endforeach;
+            ?>
 
-            <!-- Modal -->
+
+            <!-- ********************** Modal para editar ************************ -->
             <div class="modal fade" id="modal-editar-produto1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content bg-warning text-white">
@@ -118,16 +125,16 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="<?=URL?>user/" method="post" enctype="multipart/form-data" id="form-edita-produto">
-                            
+                            <form action="<?=URL?>user/editar/" method="post" enctype="multipart/form-data" id="form-edita-produto">
+                                <input type="text" name="id_produto" value="" hidden="hidden">
                                 <div class="form-group">
                                     <label for="nome-produto">Nome do produo</label>
-                                    <input type="text" class="col-6 form-control" name="nome-produto" value="<?= $produto->nome ?>" placeholder="Ex: Bolo de Cenoura" required>
+                                    <input type="text" class="col-6 form-control" id="nome_produto_edita" name="nome-produto" value="0" placeholder="Ex: Bolo de Cenoura" required>
                                     
                                 </div>  
                                 <div class="form-group">
                                     <label for="descricao">Descrição do produto</label>
-                                    <input type="text" class="form-control" name="descricao-produto" value="<?= $produto->descricao ?>" placeholder="Ex: Bolo de cenoura com cobertura de chocolate" required>
+                                    <input type="text" class="form-control" id="descricao_form_edita" name="descricao-produto" value="0" placeholder="Ex: Bolo de cenoura com cobertura de chocolate" required>
                                 </div>
                                 <div class="form-group">
                                 <label for="preco-produto">Preço</label>
@@ -135,32 +142,29 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">R$</div>
                                         </div>
-                                        <input type="text" id="valor-editar" class="col-6 form-control" name="preco-produto" value="<?= $produto->preco ?>" placeholder="Ex: 5,00" required>
+                                        <input type="text" id="" class="col-6 form-control" id="preco_produto_edita" name="preco-produto" value="" placeholder="Coloque somente o valor" required>
+                                        
                                     </div>
-                                    
+                                    <small id="emailHelp" class="form-text text-muted">Use ponto no lugar de vírgula, coloque somento o valor. Ex: 2.50</small>
                                 </div>
                                 <div class="form-group">
                                     <label for="imagem-produto">Imagem do Produto</label>
                                     
-                                    <input type="file" class="form-control-file" name="imagem-produto" placeholder="Imagem que representa seu produto">
+                                    <input type="file" class="form-control-file" name="imagem-produto" placeholder="Imagem que representa seu produto" value="">
                                 </div>
                             
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                            <input type="submit" class="btn btn-success" name="submit" value="Cadastrar">
+                            <input type="submit" class="btn btn-success" name="submit" value="Salvar">
+                            <input type="submit" class="btn btn-dark" name="submit" id="" value="Excluir">
                         </div>
                         </form>
                     </div>
                 </div>
             </div>
-
-        <?php
-            
-            // *********** fim do foreach **********************
-            endforeach;
-        ?>
-
+            <!-- **************************** Fim do modal para editar ******************** -->
+        
     </div>
 
 </div>

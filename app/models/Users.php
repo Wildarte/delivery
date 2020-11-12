@@ -25,6 +25,29 @@ class Users{
             return false;
         endif;
     }
-    
 
+    public function atualiza($dados, $id){
+
+        $this->db->query("UPDATE produtos SET nome = :nome, descricao = :descricao, preco = :preco, imagem = :imagem WHERE id = $id ");
+        $this->db->bind(":nome", $dados['nome']);
+        $this->db->bind(":descricao", $dados['descricao']);
+        $this->db->bind(":preco", $dados['preco']);
+        $this->db->bind(":imagem",$dados['imagem']);
+
+        if($this->db->executa()):
+            return true;
+        else:
+            return false;
+        endif;
+    }
+    
+    public function excluir($id){
+        $this->db->query("DELETE FROM produtos WHERE id = $id");
+
+        if($this->db->executa()):
+            return true;
+        else:
+            return false;
+        endif;
+    }
 }

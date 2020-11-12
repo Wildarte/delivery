@@ -53,7 +53,7 @@ $db->bind(":imagem", $imagem);
 
             let contaItens = parseInt($('#count_cart').text());
 
-            console.log(valorTotal)
+            console.log(valorTotal);
 
             
             // esse trecho busca no banco de a quantidade de itens, e vai colocando a lógica do botões de adicionar, diminui, acrescentar etc em cada item da lista de produtos
@@ -151,6 +151,55 @@ $db->bind(":imagem", $imagem);
                 endforeach;
             ?>
 
+
+
+
+
+            // *********************** aqui é a lógica do formulario de edição ********************
+
+            <?php
+                // *********************** inicio do laço do banco de dados para o form de edição  *********************
+               
+                $db->query("SELECT * FROM produtos");
+                $num_prod_edita = 1;// item responsável por ir adicinando a lógica dos botões conforme o número de produtos vindos do banco de dados
+                foreach($db->resultados() as $produto_logica):
+                
+            ?>
+
+            $('#botao-edita-produto<?=$num_prod_edita?>').click(function(){
+
+                var id_prod = $('#card_edita_prod<?= $num_prod_edita ?> #id<?= $num_prod_edita ?>').text();
+
+                var prod_edita = $('#card_edita_prod<?= $num_prod_edita ?> #nome_produto_edita<?= $num_prod_edita ?>').text();
+
+                var desc_edita = $('#card_edita_prod<?= $num_prod_edita ?> #desc_produto_edita<?=$num_prod_edita ?>').text();
+
+                var preco_edita = $('#card_edita_prod<?= $num_prod_edita ?> #preco_produto_edita<?=$num_prod_edita?>').text();
+                
+                console.log(id_prod);
+                console.log(prod_edita);
+                console.log(desc_edita);
+                console.log(preco_edita);
+
+                $('#form-edita-produto :input:eq(0)').val(id_prod);
+                $('#form-edita-produto :input:eq(1)').val(prod_edita);
+                $('#form-edita-produto :input:eq(2)').val(desc_edita);
+                $('#form-edita-produto :input:eq(3)').val(preco_edita);
+
+            });
+
+            <?php
+                // ********* fim do laço do banco de dados para o form de edição ****************
+                $num_prod_edita++;
+                endforeach;
+            ?>
+
+
+            $('#form-edita-produto :input:eq(3)').on("input", function(e) {
+                $(this).val($(this).val().replace(/,/g, ""));
+                $(this).val($(this).val().replace(/R/g, ""));
+                $(this).val($(this).val().replace(/$/g, ""));
+            });
         });
 
     </script>
