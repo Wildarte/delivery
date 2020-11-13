@@ -141,7 +141,7 @@
             <div class="modal-footer">
                 
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
-                <input type="submit" value="Confirmar" class="btn btn-primary">
+                <input type="submit" value="Confirmar" name="submit" class="btn btn-primary">
             </div>
 
         </form>

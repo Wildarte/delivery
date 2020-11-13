@@ -6,10 +6,10 @@ class Pedidos extends Controller{
     {
         $this->userModel = $this->model("Pedido");
     }
-
+    
     public function index(){
-
-        $this->view('pedidos/index');
+        
+        echo "<p class='text-center' style='margin-top: 10vh'><a href=".URL.">Início</a></p>";
 
     }
 
@@ -22,21 +22,22 @@ class Pedidos extends Controller{
 
         if(isset($form)):
 
-            $dados = [
-                'nome' => trim($form['nome_cliente']),
-                //'id_produto' => trim($form['id_produto']),
-                'valor_total' => trim($form['valor_total']),
-                'numero_itens' => trim($form['num_itens']),
-                //'valida_item' => trim($form['valida_item1'])
-             ];
+            if($form['submit'] == "Confirmar"):
 
-            $nome_cliente = $dados['nome'];
+                $dados = [
+                    'nome' => trim($form['nome_cliente']),
+                    'valor_total' => trim($form['valor_total']),
+                    'numero_itens' => trim($form['num_itens']),
+                ];
+
+                $nome_cliente = $dados['nome'];
 
                 if($this->userModel->cadastraPedido($nome_cliente)):
-                    echo "Id pedido gerado <br>";
-                    echo "Nome cliente: ". $nome_cliente . "<br>";
+
+                    //echo "Id pedido gerado <br>";
+                    //echo "Nome cliente: ". $nome_cliente . "<br>";
                     //echo "Id do produto: ", $dados['id_produto']."<br>";
-                    echo "Valor total do pedido: ",  $dados['valor_total']."<br>";
+                    //echo "Valor total do pedido: ",  $dados['valor_total']."<br>";
                     //echo "Valida Ítem: ", $dados['valida_item'];
 
                     //aqui é para pegar o id gerado na tabela produto
@@ -46,30 +47,30 @@ class Pedidos extends Controller{
                     //esse trecho traz o id gerado
                     foreach($db2->resultados() as $pedido):
                         $id_pedido = $pedido->id_ped;
-                        echo "O id gerado foi é foda: ". $id_pedido."<br>";
+                        //echo "O id gerado foi é foda: ". $id_pedido."<br>";
                         $dados['id_pedido'] = $id_pedido;
                     endforeach;
                     // **************************
 
 
                     $contagem = intval($dados['numero_itens'])-1;
-                    echo "Número de ítem + 1: ".$contagem. "<br>";
+                    //echo "Número de ítem + 1: ".$contagem. "<br>";
                     
                     for($x = 1; $x <= $contagem; $x++):
                         
                         
 
                         $valida = intval($form['valida_item'.$x]);
-                        echo "<h2> numero valida item".$valida."</h2>";
+                        //echo "<h2> numero valida item".$valida."</h2>";
 
                         if($valida != 0):
                             for($x2 = 1; $x2 <= $valida; $x2++):
                                 $id_produto = $form['id_produto'.$x];
-                                echo "ID DO PRODUTO: ", $id_produto."<br>";
+                                //echo "ID DO PRODUTO: ", $id_produto."<br>";
                                 if($this->userModel->cad_pedido_produto($id_produto, $id_pedido, $dados['valor_total'])):
-                                    echo "Pedido cadastrado co sucesso";
+                                    //echo "Pedido cadastrado co sucesso";
                                 else:
-                                    echo "Erro ao cadastrar pedido";
+                                    //echo "Erro ao cadastrar pedido";
                                 endif;
                             endfor;
                         endif;
@@ -78,19 +79,16 @@ class Pedidos extends Controller{
                     echo "Erro ao gerar pedido";
                 endif;
                 
+                $this->view('pedidos/confirma', $dados);
 
-            /*
-            if($this->userModel->cadastraPedido($dados['nome'])):
-                echo "Id pedido gerado";
-                echo "Cliente: ".$this->userModel->retornaCliente($dados['nome']);
             else:
-                echo "Erro ao gerar pedido";
+
             endif;
-            */
+            
         endif;
 
-        $this->view('pedidos/confirma', $dados);
-
+        echo "<p class='text-center my-5'><a href=".URL.">Início</a></p>";
+            
     }
 
 }
