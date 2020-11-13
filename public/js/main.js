@@ -10,8 +10,3 @@ $(document).ready(function(){
     
 
 });
-
-function contPrint(){
-    
-    window.print();
-}

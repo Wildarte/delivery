@@ -208,4 +208,10 @@ class User extends Controller{
 
     }
 
+    public function controle(){
+
+        $this->view('user/controle');
+
+    }
+
 }

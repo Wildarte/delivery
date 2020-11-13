@@ -17,13 +17,11 @@
             
                 <div class="card alert alert-primary">
                     <div class="card-body">
-                        <p class="card-text"><strong>ID Pedido: <?= $dados['id_pedido'] ?></strong></p>
+                        <p class="card-text"><strong class="badge badge-success">ID Pedido: <?= $dados['id_pedido'] ?></strong></p>
 
                             <h3 class="card-title">Resumo do Pedido</h3>
-                            
+                            <hr>
                             <p class="card-text"> <strong>Nome: <?= $dados['nome'] ?> </strong> </p>
-                            
-
 
                             <?php
                                 //ESSE TRECHO DE CÓDIGO É RESPONSÁVEL POR LISTAR TODOS OS PRODUTOS QUE O CLIENTE COMPROU COM AS SUAS RESPECTIVAS QUANTIDADES
