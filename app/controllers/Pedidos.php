@@ -87,7 +87,7 @@ class Pedidos extends Controller{
             
         endif;
 
-        echo "<p class='text-center my-5'><a href=".URL.">Início</a></p>";
+        echo "<p class='text-center my-5 esconde-print'><a href=".URL.">Início</a></p>";
             
     }
 

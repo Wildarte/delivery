@@ -9,3 +9,9 @@ body{
 .bag{
     padding: 5px;
 }
+
+@media print{
+    .esconde-print{
+        display: none
+    }
+}

@@ -1,4 +1,4 @@
-<div class="container" style="margin-top: 10vh;">
+<div class="container" style="margin-top: 10vh;" id="print">
 
     <div class="row">
 
@@ -82,15 +82,26 @@
                             <hr>
                             <p class="card-text"> <strong> Total: <?= $dados['valor_total'] ?> </strong> </p>
                         
+                    </div>
                 </div>
-            </div>
-            <p>
-                <button type="button" name="" id="" class="btn btn-primary">Salvar Comprovante</button>
-                <a href="<?=URL?>" name="" id="" class="btn btn-warning">Voltar ao início</a>
-            </p>
+            
 
         </div>
+    
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-12">
+            <p class="esconde-print">
+                <button type="button" name="" id="" onclick="window.print()" class="btn btn-primary">Salvar Comprovante</button>
+                <a href="<?=URL?>" name="" id="" class="btn btn-warning">Voltar ao início</a>
+            </p>
         </div>
+
     </div>
-    </div>
+                            
 </div>
