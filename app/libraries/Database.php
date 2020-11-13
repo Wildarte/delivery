@@ -76,7 +76,7 @@ class Database{
     }
 
     public function ultimoIdInserido(){
-      return $this->stmt->lastInertId();
+      return $this->stmt->lastInsertId();
     }
 
 }

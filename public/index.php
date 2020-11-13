@@ -4,20 +4,7 @@ include './../app/libraries/Rota.php';
 include './../app/libraries/Controller.php';
 include './../app/libraries/Database.php';
 
-
 $db = new Database();
-
-$nome = "Bolo de Cenoura";
-$descricao = "Bolo de cenoura com recheio de chocolate";
-$preco = 7.50;
-$imagem = "assets/imagens/img.jpg";
-
-$db->query("INSERT INTO produtos (nome, descricao, preco, imagem) VALUES(:nome, :descricao, :preco, :imagem)");
-$db->bind(":nome", $nome);
-$db->bind(":descricao", $descricao);
-$db->bind(":preco", $preco);
-$db->bind(":imagem", $imagem);
-
 
 ?>
 <!DOCTYPE html>
@@ -93,7 +80,9 @@ $db->bind(":imagem", $imagem);
                 console.log(valorTotalBRL);
                 console.log(valorTotal);
 
-                
+                let valida = $('.col-2 #add<?=$num_item_logica?>').text();
+                $('#valida_item<?=$num_item_logica?>').val(valida)
+
                 // **********  *********** */
                 let itemClicado = parseInt($('form #id_form_item #add<?= $num_item_logica ?>').text());
                 if(itemClicado){
@@ -127,7 +116,10 @@ $db->bind(":imagem", $imagem);
                     valorTotal -= preco;
 
                     //essa linha transforma o valor da variavel em formato de real
-                    let valorTotalBRL = Intl.NumberFormat('pt-br', {style: 'currency', currency: 'BRL'}).format(valorTotal)
+                    let valorTotalBRL = Intl.NumberFormat('pt-br', {style: 'currency', currency: 'BRL'}).format(valorTotal);
+
+                    let valida = $('.col-2 #add<?=$num_item_logica?>').text();
+                    $('#valida_item<?=$num_item_logica?>').val(valida)
 
                     $('#valor_total').val(valorTotalBRL)
 
@@ -194,12 +186,16 @@ $db->bind(":imagem", $imagem);
                 endforeach;
             ?>
 
-
+            // *** esse trecho impede que coloqu vírgula no campo de preço do formulário de edição do produto ******
             $('#form-edita-produto :input:eq(3)').on("input", function(e) {
                 $(this).val($(this).val().replace(/,/g, ""));
                 $(this).val($(this).val().replace(/R/g, ""));
                 $(this).val($(this).val().replace(/$/g, ""));
             });
+            // ***************************************************************************************
+
+
+
         });
 
     </script>

@@ -77,8 +77,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="post" class="form">
-
+        <form action="<?= URL ?>pedidos/confirma" method="post" class="form">
 
             <!-- ************************** item do pedido ******************************* -->
 
@@ -91,11 +90,16 @@
                 foreach($db->resultados() as $produto):
                 
             ?>
+                <input type="text" id="id_prod" name="id_produto<?=$num_item?>" value="<?= $produto->id ?>" hidden>
 
             <div class="form-row" id="id_form_item">
                 <div class="col-6">
                     <input class="form-control" type="text" name="form_item<?= $num_item ?>" id="" value="<?= $produto->nome ?>" disabled>
                 </div>
+                    
+                    <!-- **** esse trecho serve para mostrar se a pessoa clicou em um determinado item ou nao, caso ele clique é acrescentado um ao valor de item -->
+                    <input type="text" name="valida_item<?=$num_item?>" id="valida_item<?=$num_item?>" value="0" hidden>
+                    <!-- **************************************************************************** -->
 
                 <div class="col-2">
                     <strong id="add<?=$num_item?>">0</strong> x
@@ -114,7 +118,7 @@
                 
                 </div>
             </div>
-            <!-- **************************************************************************** -->
+            <!-- **********************  Fim da parte do item do pedido  ************************ -->
             
             <hr>
 
@@ -122,6 +126,11 @@
                 $num_item++;
                 endforeach;
             ?>
+            <input type="text" name="num_itens" value="<?=$num_item?>" hidden>
+            <div class="form-row">
+                <label for="valor"><strong>SEU NOME</strong></label>
+                <input class="form-control" type="text" name="nome_cliente" id="" value="" placeholder="Para sabermos quem receberá o pedido" required>
+            </div>
 
             <hr>
             <div class="form-row">
