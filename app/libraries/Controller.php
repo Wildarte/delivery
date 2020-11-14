@@ -8,7 +8,7 @@ class Controller{
 
     //carrega os modelos
     public function model($model){
-        //requere  o arquivo de modelo
+        //requere  o arquivo do model
         require_once '../app/models/'.$model.'.php';
         //instancia o modelo
         return new $model;

@@ -7,11 +7,12 @@ $(document).ready(function(){
 
     $('#valor-editar').val(formata_num($('#valor-editar').val()));
 
-    $('#url').click(function(){
-        
-            $(this).select();
-            document.execCommand('copy');
-        
-    })
+    document.getElementById('botao').addEventListener('click', function(){
+
+        document.getElementById('url').select();
+
+        document.execCommand('copy');
+
+    });
 
 });

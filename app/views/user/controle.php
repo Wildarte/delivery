@@ -87,10 +87,11 @@
             <div class="col-md-2 my-2 col-6">
                 <div class="container">
                     <div class="row">
-                        <h5>Recarregar</h5>
+                        <h5>Atualizar</h5>
                     </div>
                 </div>
                 <button type="button" class="btn btn-secondary" onclick="window.location.reload()"><i class="fas fa-redo"></i>
+                Refresh
                 </button>
             </div>
 

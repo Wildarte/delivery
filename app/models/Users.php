@@ -50,4 +50,17 @@ class Users{
             return false;
         endif;
     }
+
+    public function atualizaMsg($msg){
+
+        $this->db->query("UPDATE user SET msg = :msg");
+        $this->db->bind(":msg", $msg);
+
+        if($this->db->executa()):
+            return true;
+        else:
+            return false;
+        endif;
+
+    }
 }

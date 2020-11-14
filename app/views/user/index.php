@@ -8,6 +8,7 @@
         
             <header style="border-bottom: 1px solid black">
                 <h1>Painel</h1>
+                <small>Aqui ficam todos os produto que estão disponíveis no seu cardápio</small>
             </header>
         
         </div>
@@ -19,15 +20,23 @@
         <div class="col-12">
         
              <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-primary my-1" title="cadastrar novos produtos" data-toggle="modal" data-target="#exampleModal">
             Cadastrar Produto
             </button>
             
-            <button type="button" class="btn btn-secondary" onclick="window.location.reload()"><i class="fas fa-redo"></i>
+            <button class="btn btn-warning my-1" title="Mensagem que é exibida quando o cliente finaliza o pedido" data-toggle="modal" data-target="#modalInfo">Mensagem Info</button>
+
+            <button type="button" class="btn btn-secondary my-1" onclick="window.location.reload()"><i class="fas fa-redo" title="Recarrega a página"></i>
+            Refresh
+            </button>
+
+            <input type="text" class="btn btn my-1" id="url" value="<?=URL?>">
+
+            <button type="button" class="btn btn-success my-1" id="botao" title="Copiar link do cardápio">
+            copiar link do cardápio
             </button>
             
-            <input type="button" id="url" value="https://devpleno.com" />
-            <!-- ********************************** Modal para cadastro **************************** -->
+            <!-- ********************** Modal para cadastro de produto **************************** -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -75,6 +84,48 @@
                 </div>
             </div>
             <!-- ********************************* Fim do Modal para Cadastro *************************** -->
+
+
+
+            <!-- ********************** Modal para Mensagem do Pedido **************************** -->
+            <div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Mensagem de confirmação do pedido</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="<?=URL?>user/msg" method="post" class="form">
+                            
+                                <?php
+
+                                    $db = new Database();
+                                    $db->query("SELECT * FROM user");
+                                    foreach($db->resultados() as $msg):
+
+                                    endforeach;
+                                ?>
+
+                                <div class="form-group">
+                                    <label for="nome-produto">Escreva sua mensagem</label>
+                                    <textarea class="form-control" rows="5" name="msg-confirma" placeholder="Mensagem aqui..." required><?= $msg->msg ?></textarea>
+                                    <small class="text-muted">Coloque informações sobre retirada do produto e/ou agradecimentos singelos ao cliente</small>
+                                </div>  
+                               
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                            <input type="submit" class="btn btn-success" name="submit" value="Confirmar">
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- ********************** Fim do Modal para Mensagem do pedido *************************** -->
         </div>
     
        
@@ -92,12 +143,12 @@
             foreach($db->resultados() as $produto):
                 
         ?>
-            <!-- Esse trexo fica todos os produtos cadastrados-->
+            <!-- Esse trecho fica todos os produtos cadastrados-->
             <div class="col-md-4">
                 
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" id="img_produto<?=$num_edita_produto?>" src="<?= URL.'public/'.$produto->imagem ?>" alt="Card image cap">
-                    <div id="pega_img<?=$num_edita_produto?>"><?= URL.'public/'.$produto->imagem ?></div>
+                    <div id="pega_img<?=$num_edita_produto?>" hidden><?= URL.'public/'.$produto->imagem ?></div>
                     <div class="card-body" id="card_edita_prod<?=$num_edita_produto?>">
                         <span hidden="hidden" id="id<?=$num_edita_produto?>"><?= $produto->id ?></span>
                         <h5 class="card-title" id="nome_produto_edita<?= $num_edita_produto ?>"><?= $produto->nome ?></h5>

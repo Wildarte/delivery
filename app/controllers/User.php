@@ -255,4 +255,38 @@ class User extends Controller{
 
     }
 
+
+    //essa função é responsavel por receber a mensagem de confirmação do formulário e enviar para o model responsável pela comunicação com o banco de dados
+    public function msg(){
+
+        $form = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        if(isset($form)):
+
+            if($form['submit'] != 'Confirmar'):
+                echo "<script>alert('Algo deu errado ao confirmar')</script>";
+            else:
+                
+                if(!empty($form['msg-confirma'])):
+                    $msg = [
+                        'msg' => trim($form['msg-confirma'])
+                    ];
+
+                    if($this->userModel->atualizaMsg($msg['msg'])):
+                        echo "<script>alert('Mensagem atualizada')</script>";
+                    else:
+                        echo "<script>alert('Algo deu errado ao atualizar a mensagem')</script>";
+                    endif;
+                else:
+                    echo "<script>alert('A mensagem não pode estar vazia')</script>";
+                endif;
+
+            endif;
+
+        endif;
+
+        $this->view('user/index');
+
+    }
+
 }

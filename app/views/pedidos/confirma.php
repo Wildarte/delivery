@@ -7,8 +7,17 @@ include '../app/views/header-home.php';
     <div class="row">
 
         <div class="col-12">
+            
+            <?php
 
-            <div class=" h3 text-center alert alert-success">Seu Pedido foi confirmado e poderá ser retirado no restaurante Cleber hoje em até 2 horas</div>
+                $db = new Database();
+                $db->query("SELECT * FROM user");
+                foreach($db->resultados() as $msg):
+
+                endforeach;
+            ?>
+
+            <div class=" h3 text-center alert alert-success"><?= $msg->msg ?></div>
 
         </div>
 
