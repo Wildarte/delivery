@@ -1,4 +1,4 @@
-<footer class="bg-dark text-white esconde-print">
+<footer class="bg-dark text-white esconde-print" style="margin-top: 5vh;">
     <div class="container">
         <div class="row  p-4">
             <div class="col-12 col-md-6">
