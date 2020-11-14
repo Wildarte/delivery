@@ -1,3 +1,5 @@
+<?php include APP.'/views/header.php'; ?>
+
 <div class="container" style="margin-top: 10vh;">
     <div class="row">
         <div class="col-12">
@@ -71,16 +73,28 @@
                 </form>
             </div>
 
-            <div class="col-md-3 my-2">
+            <div class="col-md-2 my-2 col-6">
                 
-            <div class="container">
+                <div class="container">
                     <div class="row">
-                        <h5>Imprimir Pedidos Listados</h5>
+                        <h5>Imprimir Pedidos</h5>
                     </div>
                 </div>
                 <button class="btn btn-secondary" onclick="window.print()"><i class="fas fa-print"></i> Imprimir</button>
                     
             </div>
+
+            <div class="col-md-2 my-2 col-6">
+                <div class="container">
+                    <div class="row">
+                        <h5>Recarregar</h5>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary" onclick="window.location.reload()"><i class="fas fa-redo"></i>
+
+</button>
+            </div>
+
     </div>
             <hr class="esconde-print">
         

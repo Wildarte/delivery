@@ -3,7 +3,7 @@ include './../app/config.php';
 include './../app/libraries/Rota.php';
 include './../app/libraries/Controller.php';
 include './../app/libraries/Database.php';
-
+include './../app/helpers/PedidoHelper.php';
 $db = new Database();
 
 ?>
@@ -21,7 +21,7 @@ $db = new Database();
 <body>
     
     <?php
-        include APP.'/views/header.php';
+        
         $rota = new Rota();
         include APP.'/views/footer.php';
     ?>
@@ -169,15 +169,19 @@ $db = new Database();
 
                 var preco_edita = $('#card_edita_prod<?= $num_prod_edita ?> #preco_produto_edita<?=$num_prod_edita?>').text();
                 
+                let imagem_prod = $('#pega_img<?= $num_prod_edita ?>').text();
+
                 console.log(id_prod);
                 console.log(prod_edita);
                 console.log(desc_edita);
                 console.log(preco_edita);
+                console.log(imagem_prod);
 
                 $('#form-edita-produto :input:eq(0)').val(id_prod);
                 $('#form-edita-produto :input:eq(1)').val(prod_edita);
                 $('#form-edita-produto :input:eq(2)').val(desc_edita);
                 $('#form-edita-produto :input:eq(3)').val(preco_edita);
+                $('#form-edita-produto :input:eq(4)').val(imagem_prod);
 
             });
 

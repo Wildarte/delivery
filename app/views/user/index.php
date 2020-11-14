@@ -1,3 +1,5 @@
+<?php include APP.'/views/header.php'; ?>
+
 <div class="container" style="margin-top: 10vh;">
 
     <div class="row">
@@ -81,7 +83,7 @@
 
             $db = new Database();
 
-            $db->query("SELECT * FROM produtos");
+            $db->query("SELECT * FROM produtos ORDER BY id DESC");
             $num_edita_produto = 1;
             foreach($db->resultados() as $produto):
                 
@@ -91,6 +93,7 @@
                 
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" id="img_produto<?=$num_edita_produto?>" src="<?= URL.'public/'.$produto->imagem ?>" alt="Card image cap">
+                    <div id="pega_img<?=$num_edita_produto?>"><?= URL.'public/'.$produto->imagem ?></div>
                     <div class="card-body" id="card_edita_prod<?=$num_edita_produto?>">
                         <span hidden="hidden" id="id<?=$num_edita_produto?>"><?= $produto->id ?></span>
                         <h5 class="card-title" id="nome_produto_edita<?= $num_edita_produto ?>"><?= $produto->nome ?></h5>
@@ -147,6 +150,9 @@
                                     </div>
                                     <small id="emailHelp" class="form-text text-muted">Use ponto no lugar de vírgula, coloque somento o valor. Ex: 2.50</small>
                                 </div>
+
+                                <input type="text" name="img_prod" value="">
+
                                 <div class="form-group">
                                     <label for="imagem-produto">Imagem do Produto</label>
                                     
