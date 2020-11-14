@@ -351,7 +351,7 @@
                         echo "<h3 class='text-center'>Nada foi encontrado</h3>";
                     endif;
 
-                //************* caso o formulário não seja setado ***************
+    //************* caso o formulário não seja setado *************************************
                 else:
                     $db = new Database();
                     $db->query("SELECT * FROM pedidos ORDER BY id_ped DESC LIMIT 10");
