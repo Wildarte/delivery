@@ -1,6 +1,6 @@
 <?php include APP.'/views/header.php'; ?>
 
-<div class="container" style="margin-top: 10vh;">
+<div class="container" style="margin-top: 15vh;">
 
     <div class="row">
     
@@ -22,7 +22,11 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Cadastrar Produto
             </button>
-
+            
+            <button type="button" class="btn btn-secondary" onclick="window.location.reload()"><i class="fas fa-redo"></i>
+            </button>
+            
+            <input type="button" id="url" value="https://devpleno.com" />
             <!-- ********************************** Modal para cadastro **************************** -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -151,7 +155,7 @@
                                     <small id="emailHelp" class="form-text text-muted">Use ponto no lugar de vírgula, coloque somento o valor. Ex: 2.50</small>
                                 </div>
 
-                                <input type="text" name="img_prod" value="">
+                                <input type="text" name="img_prod" value="" hidden>
 
                                 <div class="form-group">
                                     <label for="imagem-produto">Imagem do Produto</label>

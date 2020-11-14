@@ -1,6 +1,6 @@
 <?php include APP.'/views/header.php'; ?>
 
-<div class="container" style="margin-top: 10vh;">
+<div class="container" style="margin-top: 15vh;">
     <div class="row">
         <div class="col-12">
             <header>
@@ -91,8 +91,7 @@
                     </div>
                 </div>
                 <button type="button" class="btn btn-secondary" onclick="window.location.reload()"><i class="fas fa-redo"></i>
-
-</button>
+                </button>
             </div>
 
     </div>

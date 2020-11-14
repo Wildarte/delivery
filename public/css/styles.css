@@ -15,3 +15,21 @@ body{
         display: none
     }
 }
+
+.header-home{
+    background-color: firebrick;
+    min-height: 10vh;
+    padding: 5px;
+}
+
+.header-home img, .logo-painel img{
+    max-height: 10vh;
+}
+
+.background-home{
+    background-image: linear-gradient(to right, #ffad99
+    ,  #ffff80);
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
+}

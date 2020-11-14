@@ -1,8 +1,13 @@
-<div class="container" style="margin-top: 80px;">
+<?php 
+include '../app/views/header-home.php';
+?>
+
+<div class="background-home" style="margin-top: 10vh; min-height: 70vh">
+<div class="container">
 
     <div class="row">
         <div class="col-12 text-center">
-            <h5 class="display-4">Nosso Cardápio</h5>
+            <h6 class="display-4 alert alert-primary"><b>Nosso Cardápio</b></h6>
         </div>
     </div>
 
@@ -24,7 +29,7 @@
         ?>
 
         <div class="col-12 col-md-6" style="margin-top: 5px; margin-bottom: 5px">
-            <div class="card" id="item<?= $num_produto ?>">
+            <div class="card shadow" id="item<?= $num_produto ?>">
                 <div class="row no-gutters">
                     <div class="col-sm-5">
                         <img class="card-img" src="<?= $produto->imagem ?>" alt="Suresh Dasari Card">
@@ -151,3 +156,5 @@
 </div>
 
 <!-- ************************************************************************************************ -->
+
+</div>
