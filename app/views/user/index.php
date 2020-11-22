@@ -20,21 +20,21 @@
         <div class="col-12">
         
              <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary my-1" title="cadastrar novos produtos" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-secondary my-1" title="cadastrar novos produtos" data-toggle="modal" data-target="#exampleModal">
             Cadastrar Produto
             </button>
             
-            <button class="btn btn-warning my-1" title="Mensagem que é exibida quando o cliente finaliza o pedido" data-toggle="modal" data-target="#modalInfo">Mensagem Info</button>
+            <button class="btn btn-secondary my-1" title="Mensagem que é exibida quando o cliente finaliza o pedido" data-toggle="modal" data-target="#modalInfo">Mensagem Info</button>
 
             <button type="button" class="btn btn-secondary my-1" onclick="window.location.reload()"><i class="fas fa-redo" title="Recarrega a página"></i>
             Refresh
             </button>
 
-            <input type="text" class="btn btn my-1" id="url" value="<?=URL?>">
-
             <button type="button" class="btn btn-success my-1" id="botao" title="Copiar link do cardápio">
             copiar link do cardápio
             </button>
+
+            <input type="text" class="btn btn my-1" id="url" value="<?=URL?>">
             
             <!-- ********************** Modal para cadastro de produto **************************** -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -1,11 +1,10 @@
 <?php
-include './../app/config.php';
-include './../app/libraries/Rota.php';
-include './../app/libraries/Controller.php';
-include './../app/libraries/Database.php';
-include './../app/helpers/PedidoHelper.php';
-$db = new Database();
+session_start();
 
+include './../app/config.php';
+include './../app/autoload.php';
+
+$db = new Database();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -150,6 +149,9 @@ $db = new Database();
 
             // *********************** aqui é a lógica do formulario de edição ********************
 
+            
+            
+            
             <?php
                 // *********************** inicio do laço do banco de dados para o form de edição  *********************
                
@@ -191,7 +193,7 @@ $db = new Database();
                 endforeach;
             ?>
 
-            // *** esse trecho impede que coloqu vírgula no campo de preço do formulário de edição do produto ******
+            // *** esse trecho impede que coloque vírgula no campo de preço do formulário de edição do produto ******
             $('#form-edita-produto :input:eq(3)').on("input", function(e) {
                 $(this).val($(this).val().replace(/,/g, ""));
                 $(this).val($(this).val().replace(/R/g, ""));

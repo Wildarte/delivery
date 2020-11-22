@@ -4,6 +4,9 @@ class User extends Controller{
 
     public function __construct()
     {
+        if(!isset($_SESSION['user_id'])): //caso tenha a sessão exibe o menu
+            Url::redirect('login/logar');
+        endif;
         $this->userModel = $this->model("Users");
     }
     
@@ -162,7 +165,7 @@ class User extends Controller{
 
             /********* Esse trecho salva a imagem no diretório public/images ************** */
 
-            if(isset($_POST['submit'])){
+            if($_POST['submit'] == "Salvar"){
 
                 $target_dir = "images/";
                 $target_file = $target_dir . basename($_FILES['imagem-produto']['name']); 
