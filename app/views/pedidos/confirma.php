@@ -108,11 +108,40 @@ include '../app/views/header-home.php';
 
         <div class="col-12">
             <p class="esconde-print">
-                <button type="button" name="" id="" onclick="window.print()" class="btn btn-primary">Salvar Comprovante</button>
+                
+                <button type="button" name="" id="" onclick="window.print()" class="btn btn-primary">Save/print </button>
                 <a href="<?=URL?>" name="" id="" class="btn btn-warning">Voltar ao início</a>
+                    
+                <button type="button" id="cliente_del_pedido" class="btn btn-danger" data-toggle="modal" data-target="#modalExemplo">
+                Cancelar Pedido
+                </button>
             </p>
         </div>
 
     </div>
                             
 </div>
+
+<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        O seu pedido já foi enviado, mas você ainda pode cancelar caso queira
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <form action="<?=URL?>pedidos/delpedido" method="post" class="esconde-print">
+            <input type="text" name="id_del" value="<?= $dados['id_pedido'] ?>" hidden>
+            <input type="submit" class="esconde-print btn btn-danger" name="submit" value="Cancelar Pedido">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+        

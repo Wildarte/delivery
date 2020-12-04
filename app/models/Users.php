@@ -63,4 +63,31 @@ class Users{
         endif;
 
     }
+
+    public function atualizaCabecalho($dados){
+
+        $this->db->query("UPDATE cardapio SET title = :title, subtitle = :subtitle");
+        $this->db->bind(":title", $dados['title']);
+        $this->db->bind(":subtitle", $dados['subtitle']);
+
+        if($this->db->executa()):
+            return true;
+        else:
+            return false;
+        endif;
+
+    }
+
+    public function deletePedido($id){
+
+        $this->db->query("DELETE FROM pedidos WHERE id_ped = $id");
+
+        if($this->db->executa()):
+            return true;
+        else:
+            return false;
+        endif;
+
+    }
+
 }

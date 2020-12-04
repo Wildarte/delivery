@@ -49,5 +49,16 @@ class Pedido{
         endforeach;
     }
 
+    public function deletePedido($id){
+
+        $this->db->query("DELETE FROM pedidos WHERE id_ped = $id");
+
+        if($this->db->executa()):
+            return true;
+        else:
+            return false;
+        endif;
+
+    }
 
 }

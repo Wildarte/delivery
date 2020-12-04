@@ -9,7 +9,16 @@ class Login extends Controller{
     }
 
     public function index(){
-        $this->view('login/logar');
+
+        $dados = [
+            'nome' => '',
+            'senha' => '',
+            'nome_erro' => '',
+            'senha_erro' => '',
+        ];
+
+        $this->view('login/index', $dados);
+
     }
 
     public function cadastrar(){
@@ -144,7 +153,7 @@ class Login extends Controller{
 
         endif;
 
-        $this->view('login/logar', $dados);
+        $this->view('login/index', $dados);
 
     }
 
@@ -163,7 +172,7 @@ class Login extends Controller{
 
         session_destroy();
 
-        Url::redirect('login/logar');
+        Url::redirect('login/index');
     }
 
 }

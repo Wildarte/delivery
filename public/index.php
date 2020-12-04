@@ -25,7 +25,7 @@ $db = new Database();
         include APP.'/views/footer.php';
     ?>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
@@ -76,6 +76,7 @@ $db = new Database();
                 //essa linha transforma o valor da variavel em formato de real
                 let valorTotalBRL = Intl.NumberFormat('pt-br', {style: 'currency', currency: 'BRL'}).format(valorTotal)
                 $('#valor_total').val(valorTotalBRL)
+                $('#show_total').text(valorTotalBRL)
 
                 console.log(valorTotalBRL);
                 console.log(valorTotal);
@@ -122,6 +123,7 @@ $db = new Database();
                     $('#valida_item<?=$num_item_logica?>').val(valida)
 
                     $('#valor_total').val(valorTotalBRL)
+                    $('#show_total').text(valorTotalBRL)
 
                     
                 }
@@ -201,6 +203,36 @@ $db = new Database();
             });
             // ***************************************************************************************
 
+
+
+            
+            <?php
+            //esse techo de código é para colocar o id do produto que será deletado no form que envia o id do produto que vais ser deletado
+            $db = new Database();
+            $db->query("SELECT * FROM pedidos");
+
+            foreach($db->resultados() as $pedidoBotao):
+            ?>
+
+            $('#botao<?= $pedidoBotao->id_ped ?>').click(function(){
+
+                $('#form_delete :input:eq(0)').val('<?= $pedidoBotao->id_ped?>');
+                $('#form_delete #id').text('<?= $pedidoBotao->id_ped?>');
+
+            })
+
+            <?php
+                endforeach;
+            ?>
+            //**************** fim do trecho de código onde é para colocar o id do produto que será deletado */
+
+            
+            
+            $('#cliente_del_pedido'),click(function(){
+
+                $('')
+
+            })                
 
 
         });

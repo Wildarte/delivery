@@ -9,7 +9,9 @@ class Pedidos extends Controller{
     
     public function index(){
         
-        echo "<p class='text-center' style='margin-top: 10vh'><a href=".URL.">Início</a></p>";
+        echo "";
+
+        $this->view('pedidos/index');
 
     }
 
@@ -89,6 +91,45 @@ class Pedidos extends Controller{
 
         echo "<p class='text-center my-5 esconde-print'><a href=".URL.">Início</a></p>";
             
+    }
+
+
+    public function delpedido(){
+
+        $form = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $dados = [
+            'alert' => '',
+            'text' => ''
+        ];
+
+        if(isset($form)):
+
+            if($form['submit'] == "Cancelar Pedido"):
+                
+                if($this->userModel->deletePedido($form['id_del'])):
+                
+                    //echo '<script>alert("Pedido '. $form['id_del'].' deletado com sucesso")</script>';
+                    $dados['alert'] = 'alert-success';
+                    $dados['text'] = 'Pedido cancelado com sucesso';
+                else:
+                    //echo '<script>alert("Erro ao deletar pedido '. $form['id_del'].'")</script>';
+                    $dados['alert'] = 'alert-danger';
+                    $dados['text'] = 'Erro ao cancelar o pedido';
+                endif;
+
+            else:
+
+                $dados['alert'] = 'alert-warning';
+                $dados['text'] = 'Nenhum id de pedido encontrado';
+            endif;
+            
+        else:
+            $dados['alert'] = 'alert-secondary';
+            $dados['text'] = 'Nenhum ID de pedido foi passado';
+        endif;
+
+        $this->view('pedidos/index', $dados);
+
     }
 
 }

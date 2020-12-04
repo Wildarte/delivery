@@ -6,9 +6,19 @@ include '../app/views/header-home.php';
 <div class="container">
 
     <div class="row">
+        <?php
+
+            $db = new Database();
+            $db->query("SELECT * FROM cardapio");
+            foreach($db->resultados() as $cardapio):
+
+            endforeach;
+        ?>
         <div class="col-12 text-center">
-            <h6 class="display-4 alert alert-primary"><b>Nosso Cardápio</b></h6>
+            <h2 class="h2 alert alert-primary"><b><?= $cardapio->title ?></b></h2>
+            <h5 class="text-secondary alert-secondary"><?= $cardapio->subtitle ?></h5>
         </div>
+        
     </div>
 
 </div>
@@ -63,7 +73,7 @@ include '../app/views/header-home.php';
     
     <div data-toggle="modal" data-target="#exampleModal">
         <i class="fas fa-shopping-bag" style="position:fixed;width:60px;height:60px;bottom:40px;right:40px;background-color: #ff6600;color:#FFF;border-radius:50px;text-align:center;font-size:40px;
-        z-index: 1000; padding: 5px" target="_blank">
+        z-index: 1000; padding: 5px; cursor:pointer" target="_blank">
                 <span style="top: -60px; z-index: 1000000 !important" class="badge badge-pill badge-danger" id="count_cart">0</span>
         </i>
     </div>
@@ -139,10 +149,12 @@ include '../app/views/header-home.php';
 
             <hr>
             <div class="form-row">
-                <label for="valor"><strong>Total R$</strong></label>
-                <input class="form-control" type="text" name="valor_total" id="valor_total" value="0">
+                <label for="valor"><strong>Total R$</strong></label><br>
+                
+                <input class="form-control" type="text" name="valor_total" id="valor_total" value="0" hidden>
+                
             </div>
-
+            <p class="col-md-4 alert alert-success" id="show_total">0</p>
             <div class="modal-footer">
                 
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>

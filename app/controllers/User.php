@@ -4,7 +4,7 @@ class User extends Controller{
 
     public function __construct()
     {
-        if(!isset($_SESSION['user_id'])): //caso tenha a sessão exibe o menu
+        if(!isset($_SESSION['user_id'])): //caso tenha a sessão, exibe o menu
             Url::redirect('login/logar');
         endif;
         $this->userModel = $this->model("Users");
@@ -290,6 +290,80 @@ class User extends Controller{
 
         $this->view('user/index');
 
+    }
+
+
+    //essa função é responsavel por receber o título e subtítulo e enviar para o model responsável pela comunicação com o banco de dados
+    public function cabecalho(){
+
+        $form = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        if(isset($form)):
+
+            if($form['submit'] != 'Confirmar'):
+                echo "<script>alert('Algo deu errado ao confirmar')</script>";
+            else:
+                
+                if(!empty($form['titulo_cardapio']) && !empty($form['subtitulo_cardapio'])):
+                    $dados = [
+                        'title' => trim($form['titulo_cardapio']),
+                        'subtitle' => trim($form['subtitulo_cardapio'])
+                    ];
+
+                    if($this->userModel->atualizaCabecalho($dados)):
+                        echo "<script>alert('Cabeçalho Atualizado com Sucesso')</script>";
+                    else:
+                        echo "<script>alert('Algo deu errado ao atualizar o cabeçalho')</script>";
+                    endif;
+                else:
+                    echo "<script>alert('Os campos não podem estar vazios')</script>";
+                endif;
+
+            endif;
+
+        endif;
+
+        $this->view('user/index');
+
+    }
+
+    public function delpedido(){
+
+        $form = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $dados = [
+            'alert' => '',
+            'text' => ''
+        ];
+
+        if(isset($form)):
+            
+            if(!empty($form['id_pedido'])):
+
+                if($this->userModel->deletePedido($form['id_pedido'])):
+                
+                    //echo '<script>alert("Pedido '. $form['id_pedido'].' deletado com sucesso")</script>';
+                    $dados['alert'] = 'alert-success';
+                    $dados['text'] = 'Pedido deletado com sucesso';
+                else:
+                    //echo '<script>alert("Erro ao deletar pedido '. $form['id_pedido'].'")</script>';
+                    $dados['alert'] = 'alert-danger';
+                    $dados['text'] = 'Erro ao deletar o pedido';
+                endif;
+
+            else:
+
+                $dados['alert'] = 'alert-warning';
+                $dados['text'] = 'Nenhum id de pedido encontrado';
+            endif;
+            
+        else:
+            $dados['alert'] = 'alert-secondary';
+            $dados['text'] = 'Nenhum ID de pedido foi passado';
+        endif;
+        
+        $this->view('user/delpedido', $dados);
+        
     }
 
 }

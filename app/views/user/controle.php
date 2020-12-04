@@ -116,8 +116,6 @@
                     ];
                     
                     $db = new Database();
-
-    
     //****************  caso a pesquisa seja por id ************************************* */
                     if($dado_recebe['tipo'] == 'busca_id'):
                         echo "tipo busca: ".$dado_recebe['tipo'];
@@ -359,13 +357,16 @@
                 endif;
 
                 foreach($db->resultados() as $pedidos):
-                $valor_total;
+                $valor_total; //essa variavel armazena o valor total do pedio em questão
                 $id = $pedidos->id_ped;
             ?>
 
             <div class="card alert alert-primary">
                     <div class="card-body">
                         <p class="card-text"><strong class="badge badge-success">ID Pedido: <?= $pedidos->id_ped ?></strong></p>
+                            <span class="close">
+                                <button id="botao<?= $pedidos->id_ped ?>" class="btn btn-danger" data-toggle="modal" data-target="#modalDeletaPedido">Deletar</button>
+                            </span>
 
                             <h3 class="card-title">Resumo do Pedido</h3>
                             <hr>
@@ -387,7 +388,7 @@
                                     $produto_completo = "";//essa variavel fica responsável em receber todo o nome do produto e sua quantidade para ser exibido no final
 
                                     
-                                    //nesse trecho é verificado se a variavel $id_atual é diferente da $produto->id_prod, pq no final dessa condição eu coloco o id que eu usei para contar a quantidade do produto na variavel $id_atual, portanto se essa der true quer dizer que eu posso contar um produto diferente, é um complicado mesmo, eu demorei para desenvolver essa lógica, talvez se eu tivesse feito de outra forma seria mais fácil, mas assim pelo menos ta funcionando (risos)
+                                    //nesse trecho é verificado se a variavel $id_atual é diferente da $produto->id_prod, pq no final dessa condição eu coloco o id que eu usei para contar a quantidade do produto na variavel $id_atual, portanto se essa der true, quer dizer que eu posso contar um produto diferente, é um pouco complicado mesmo, eu demorei para desenvolver essa lógica, talvez se eu tivesse feito de outra forma seria mais fácil, mas assim pelo menos ta funcionando (risos)
                                     if($id_atual != $produto->id_prod):
                                         $valor_total = $produto->valor;
 
@@ -446,6 +447,38 @@
 
             ?>
 
+            <?php //modal para quando o usuário clicar no botão de deletar o pedido ?>
+
+            <div class="modal fade" id="modalDeletaPedido" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Deletar Pedido</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="<?=URL?>user/delpedido/" method="post" id="form_delete">
+                    <div class="modal-body">
+                        
+                        <input type="text" name="id_pedido" id="" value="" hidden>
+                        <p>Pedido:<br>
+                        <strong id="id"></strong><br>
+                        está prestes a ser deletado, deseja deletar?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        
+                            <input type="submit" class="btn btn-primary" name="Enviar" value="Deletar">
+                        </form>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 </div>
+
+

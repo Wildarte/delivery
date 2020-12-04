@@ -23,8 +23,10 @@
             <button type="button" class="btn btn-secondary my-1" title="cadastrar novos produtos" data-toggle="modal" data-target="#exampleModal">
             Cadastrar Produto
             </button>
+
+            <button class="btn btn-secondary my-1" title="Mensagem que é exibida quando o cliente finaliza o pedido" data-toggle="modal" data-target="#modalTitulo">Cabeçalho cardápio</button>
             
-            <button class="btn btn-secondary my-1" title="Mensagem que é exibida quando o cliente finaliza o pedido" data-toggle="modal" data-target="#modalInfo">Mensagem Info</button>
+            <button class="btn btn-secondary my-1" title="Mensagem que é exibida quando o cliente finaliza o pedido" data-toggle="modal" data-target="#modalInfo">Mensagem Pedido</button>
 
             <button type="button" class="btn btn-secondary my-1" onclick="window.location.reload()"><i class="fas fa-redo" title="Recarrega a página"></i>
             Refresh
@@ -84,6 +86,54 @@
                 </div>
             </div>
             <!-- ********************************* Fim do Modal para Cadastro *************************** -->
+
+
+
+            <!-- ********************** Modal para Cabeçalho do Cardápio **************************** -->
+            <div class="modal fade" id="modalTitulo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Aqui você configura o título e o subtítulo do cardápio</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="<?=URL?>user/cabecalho" method="post" class="form">
+                            
+                                <?php
+
+                                    $db = new Database();
+                                    $db->query("SELECT * FROM cardapio");
+                                    foreach($db->resultados() as $cardapio):
+
+                                    endforeach;
+                                ?>
+                                <div class="form-group">
+                                    <label for="titulo_cardapio">Título do Cardápio</label>
+                                    <input type="text" class="form-control" name="titulo_cardapio" value="<?= $cardapio->title ?>">
+                                    <small class="text-muted">Esse título ficará no cabeçalho do cardápio</small>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="nome-produto">Subtítulo do Cardápio</label>
+                                    <textarea class="form-control" rows="5" name="subtitulo_cardapio" placeholder="Subtítulo aqui..." required><?= $cardapio->subtitle ?></textarea>
+                                    <small class="text-muted">Coloque informações que possam ser importantes para que seu cliente saiba, como novos horário locais de retirada, ou alguma informação que você queira passar para o cliente antes dele efetuar o pedido</small>
+                                </div>  
+                               
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                            <input type="submit" class="btn btn-success" name="submit" value="Confirmar">
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- ********************** Fim do Modal para Cabeçalho do cardápio *************************** -->
 
 
 
