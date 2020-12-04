@@ -365,7 +365,7 @@
                     <div class="card-body">
                         <p class="card-text"><strong class="badge badge-success">ID Pedido: <?= $pedidos->id_ped ?></strong></p>
                             <span class="close">
-                                <button id="botao<?= $pedidos->id_ped ?>" class="btn btn-danger" data-toggle="modal" data-target="#modalDeletaPedido">Deletar</button>
+                                <button id="botao<?= $pedidos->id_ped ?>" class="btn btn-danger esconde-print" data-toggle="modal" data-target="#modalDeletaPedido">Deletar</button>
                             </span>
 
                             <h3 class="card-title">Resumo do Pedido</h3>

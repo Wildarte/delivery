@@ -126,13 +126,14 @@ include '../app/views/header-home.php';
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Cancelar Pedido</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        O seu pedido já foi enviado, mas você ainda pode cancelar caso queira
+        Você está prestes a cancelar um pedido que já foi enviado.<br>
+        <strong>Quer mesmo fazer isso?</strong>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

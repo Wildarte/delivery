@@ -61,4 +61,13 @@ class Pedido{
 
     }
 
+    public function pedidoExiste($pedido){
+        $this->db->query("SELECT * FROM pedido WHERE id_pedido");
+        if($this->db->executa()):
+            return true;
+        else:
+            return false;
+        endif;
+    }
+
 }
